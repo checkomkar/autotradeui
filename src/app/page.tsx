@@ -1,4 +1,6 @@
+import Button from "@mui/material/Button";
 import Image from "next/image";
+import Stack from "@mui/material/Stack";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -29,6 +31,11 @@ export default function Home() {
       </div>
 
       <div className={styles.center}>
+        <Stack spacing={2} direction="row">
+          <Button variant="text">Text</Button>
+          <Button variant="contained">Contained</Button>
+          <Button variant="outlined">Outlined</Button>
+        </Stack>
         <Image
           className={styles.logo}
           src="/next.svg"
