@@ -12,11 +12,15 @@ import React from "react";
 function TradeSection() {
   return (
     <>
-      <Grid xs sx={{ textAlign: "left" }}>
+      <Grid xs={12} md sx={{ textAlign: { md: "left", xs: "center" } }}>
         <Stack mt={1}>Strike: NIFTY24041822550CE</Stack>
         <Stack mt={1}>LTP: 128.65</Stack>
         <Stack mt={2}>
-          <Stack direction={"row"} spacing={2}>
+          <Stack
+            direction={"row"}
+            spacing={2}
+            sx={{ justifyContent: { md: "left", xs: "center" } }}
+          >
             <Button variant="contained" color="error" startIcon={<ArrowBack />}>
               Sell Call
             </Button>
@@ -30,7 +34,7 @@ function TradeSection() {
           </Stack>
         </Stack>
       </Grid>
-      <Grid xs={6} sx={{ textAlign: "center" }}>
+      <Grid xs={12} md={6} sx={{ textAlign: "center" }}>
         <Stack mt={1}>NIFTY 50</Stack>
         <Stack mt={1} direction={"row"} sx={{ justifyContent: "center" }}>
           LTP: 22519.14{" "}
@@ -44,19 +48,23 @@ function TradeSection() {
           sx={{ justifyContent: "center" }}
           spacing={2}
         >
-          <Button variant="outlined" color="error" startIcon={<ArrowForward />}>
+          <Button variant="outlined" color="error">
             Close All Positions (F6)
           </Button>
-          <Button variant="outlined" color="error" startIcon={<ArrowForward />}>
+          <Button variant="outlined" color="error">
             Cancel All Orders (F7)
           </Button>
         </Stack>
       </Grid>
-      <Grid xs sx={{ textAlign: "right" }}>
+      <Grid xs={12} md sx={{ textAlign: { md: "right", xs: "center" } }}>
         <Stack mt={1}>Strike: NIFTY24041822550PE</Stack>
         <Stack mt={1}>110.45: LTP </Stack>
         <Stack mt={2}>
-          <Stack direction={"row"} sx={{ justifyContent: "right" }} spacing={2}>
+          <Stack
+            direction={"row"}
+            sx={{ justifyContent: { md: "right", xs: "center" } }}
+            spacing={2}
+          >
             <Button
               variant="contained"
               color="success"

@@ -73,7 +73,7 @@ function Terminal() {
           <h3>Broker: Finvasia (FA***23)</h3>
         </Grid>
         <Grid sx={{ mt: 2 }}>
-          <Stack direction="row" spacing={4}>
+          <Stack direction="row" spacing={4} sx={{ overflowX: "scroll" }}>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="demo-simple-select-standard-label">
                 Exchange
@@ -195,7 +195,11 @@ function Terminal() {
               </Select>
             </FormControl>
           </Stack>
-          <Stack direction="row" spacing={4} sx={{ mt: 2 }}>
+          <Stack
+            direction="row"
+            spacing={4}
+            sx={{ mt: 2, overflowX: "scroll" }}
+          >
             <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
               <InputLabel id="product-label">Product</InputLabel>
               <Select
