@@ -1,3 +1,5 @@
+// "use-client";
+
 import {
   ArrowBack,
   ArrowDownward,
@@ -5,11 +7,79 @@ import {
   ArrowUpward,
 } from "@mui/icons-material";
 import { Button, Stack } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
+// import API from "../../../../shoonya/lib/RestApi";
 import Grid from "@mui/material/Unstable_Grid2";
-import React from "react";
+import { TOTP } from "totp-generator";
+
+const authparams = {
+  userid: "FA26323",
+  password: "Global@99510",
+  twoFA: "OTP/TOTP",
+  vendor_code: "FA26323_U",
+  api_secret: "d4cca4f8be3c72a58a8ee8358ccdd81e",
+  imei: "abc1234",
+  totpToken: "4U35W6I42L53VYXLM7F46XN7AR6Q6PZW",
+};
 
 function TradeSection() {
+  // const api = new API({});
+  const [lp, setLp] = useState(0);
+  // const { otp } = TOTP.generate(authparams.totpToken);
+  // authparams.twoFA = otp;
+  // function receiveQuote(data: any) {
+  //   console.log("Quote ::", data);
+  //   setLp(data.lp);
+  // }
+
+  // function receiveOrders(data: any) {
+  //   console.log("Order ::", data);
+  // }
+
+  // function open(data: any) {
+  //   // console.log("subsribing to :: ", instruments);
+  //   let instruments = "NFO|52222";
+  //   api.subscribe(instruments);
+  // }
+
+  // api
+  //   .login(authparams)
+  //   .then((res: any) => {
+  //     if (res.stat !== "Ok") return;
+
+  //     const params = {
+  //       socket_open: open,
+  //       quote: receiveQuote,
+  //       order: receiveOrders,
+  //     };
+
+  //     api.start_websocket(params);
+  //     setTimeout(() => {
+  //       let instruments = "NFO|52222";
+  //       api.subscribe(instruments);
+  //     }, 5000);
+  //   })
+  //   .catch((err: any) => {
+  //     console.error(err);
+  //   });
+
+  useEffect(() => {
+    const ws = new WebSocket("ws://localhost:3001");
+    ws.onmessage = function (event) {
+      const json = JSON.parse(event.data);
+      // console.log("event", json);
+      try {
+        if (json) {
+          let incomingData = json.str;
+          if (incomingData.lp) setLp(incomingData.lp || 0);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    return () => ws.close();
+  }, []);
   return (
     <>
       <Grid xs={12} md sx={{ textAlign: { md: "left", xs: "center" } }}>
@@ -37,7 +107,7 @@ function TradeSection() {
       <Grid xs={12} md={6} sx={{ textAlign: "center" }}>
         <Stack mt={1}>NIFTY 50</Stack>
         <Stack mt={1} direction={"row"} sx={{ justifyContent: "center" }}>
-          LTP: 22519.14{" "}
+          LTP: {lp}{" "}
           <span style={{ color: "red", paddingLeft: "10px" }}>
             (-234.40/-1.03%)
           </span>
